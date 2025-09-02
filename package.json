@@ -7,22 +7,25 @@
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
+			"types": "./dist/index.d.ts",
 			"import": "./dist/index.esm.js",
-			"require": "./dist/index.cjs.js",
-			"types": "./dist/index.d.ts"
+			"require": "./dist/index.cjs.js"
 		}
 	},
 	"files": [
-		"dist"
+		"dist",
+		"README.md",
+		"LICENSE"
 	],
 	"sideEffects": [
 		"**/*.scss"
 	],
 	"scripts": {
-		"build": "rimraf dist && rollup -c",
+		"clean": "rimraf dist",
+		"build": "npm run clean && rollup -c",
 		"type-check": "tsc --noEmit",
 		"prepublishOnly": "npm run build",
-    "scss-fix": "yarn sass-migrator module --migrate-deps src/**/*.scss"
+		"scss-fix": "yarn sass-migrator module --migrate-deps src/**/*.scss"
 	},
 	"peerDependencies": {
 		"react": ">=17",
