@@ -18,7 +18,8 @@
 		"LICENSE"
 	],
 	"sideEffects": [
-		"**/*.scss"
+		"**/*.scss",
+		"**/*.css"
 	],
 	"scripts": {
 		"clean": "rimraf dist",

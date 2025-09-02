@@ -23,6 +23,19 @@ const jsBuild = {
 			modules: true,
 			extract: false, // inline CSS sebagai string (biar 1 file dipakai consumer)
 			use: ['sass'],
+			minimize: true,
+			inject: (css, id) => {
+				// aman untuk SSR: hanya inject di browser
+				if (typeof document === 'undefined') return;
+				const el = document.createElement('style');
+				el.setAttribute('data-arangui', id || '');
+				el.appendChild(document.createTextNode(css));
+				document.head.appendChild(el);
+				return () => {
+					// optional cleanup kalau modul di-HMR / unmount penuh
+					el.parentNode && el.parentNode.removeChild(el);
+				};
+			},
 		}),
 	],
 };
